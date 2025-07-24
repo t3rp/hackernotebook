@@ -1,0 +1,13 @@
+{% set currentUrl %}{{ page.url }}{% endset %}
+{% set navPages = collections.all | eleventyNavigation %}
+
+<nav>
+  <ul role="list">
+    {%- for entry in navPages %}
+      {% if not entry.hide %}
+        <li><a {% if currentUrl === entry.url %}aria-current="page"{% endif %} href="{{ entry.url }}">{{ entry.title }}</a></li>
+      {% endif %}
+    {%- endfor %}
+      <li><a href="/feed.xml">RSS</a></li>
+  </ul>
+</nav>

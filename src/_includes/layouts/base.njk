@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "ascii.txt" %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description or metadata.description }}">
+    <meta name="author" content="{{ metadata.author.name }}">
+    <link rel="icon" href="{{ metadata.favicon }}" type="image/svg+xml" />
+    {% set css %}
+        {% include "style.css" %}
+        {% include "prism.css" %}
+    {% endset %}
+    <style>{{ css | cssmin | safe }}</style>
+    <title>{{ title or metadata.title }} | {{ metadata.siteName }}</title>
+</head>
+<body>
+    <header>
+        <h1>
+            {{ metadata.siteName }}
+        </h1>
+    </header>
+    <main>
+        {% include "layouts/navigation.njk" %}
+        <article>
+            {{ content | safe }}
+        </article>
+    </main>
+    <footer>
+        {% include "layouts/footer.njk" %}
+    </footer>
+<!-- Current page: {{ page.url }} -->
+</body>
+</html>

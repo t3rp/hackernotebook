@@ -1,0 +1,27 @@
+{
+    "name": "hackernotebook.com",
+    "version": "1.0.0",
+    "description": "Personal blog powered by 11ty.",
+    "main": ".eleventy.js",
+    "scripts": {
+        "start": "npx @11ty/eleventy --serve",
+        "watch": "npx @11ty/eleventy --watch",
+        "build": "eleventy"
+    },
+    "keywords": [
+        "blog",
+        "11ty"
+    ],
+    "author": "",
+    "license": "",
+    "devDependencies": {
+        "@11ty/eleventy": "^3.0.0-alpha.5",
+        "@11ty/eleventy-img": "^4.0.2",
+        "@11ty/eleventy-navigation": "^0.3.5",
+        "@11ty/eleventy-plugin-rss": "^1.2.0",
+        "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+        "clean-css": "^5.3.3",
+        "lodash": "^4.17.21",
+        "luxon": "^3.4.4"
+    }
+}

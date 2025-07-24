@@ -1,0 +1,256 @@
+/* hackernotebook.com 11ty blog */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Layout */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 5vh clamp(1rem, 5vw, 3rem) 1rem;
+  font-family: sans-serif;
+  line-height: 1.5;
+  color: #222;
+  font-size: 18px;
+  overflow-wrap: break-word;
+}
+
+body > * {
+  --layout-spacing: max(2vh, 2rem);
+  --max-width: 100ch;
+  width: min(100%, var(--max-width));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navigation */
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0rem 0 0rem 0;
+}
+
+nav ul li {
+  padding: 1rem .5rem 1rem 0;
+}
+
+nav [aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: .5rem;
+}
+
+nav a {
+  font-weight: bold;
+  background-color: #f5f5f5;
+  text-decoration: none;
+  color: #222;
+  padding: 1rem;
+  text-underline-offset: .5rem;
+}
+
+nav a:hover {
+  background-color: #f8f8f8;
+  color: #222;
+  text-decoration: underline;
+}
+
+/* Header */ 
+
+header,
+main,
+main > * + * {
+  margin-top: var(--layout-spacing);
+}
+
+/* Footer */
+
+body > footer {
+  margin-top: auto;
+  padding-top: var(--layout-spacing);
+}
+
+body > footer div {
+  border-top: 1px solid #ccc;
+  padding-top: 0.5rem;
+  color: #767676;
+}
+
+body > footer div a {
+  color: #767676;
+}
+
+/* Article */
+
+article * + * {
+  margin-top: 1rem;
+}
+
+article p {
+  line-height: 2.5rem;
+  color: #333;
+}
+
+/* Header Typography */
+
+header h1 {
+  font-size: 5rem;
+  overflow-wrap: break-word;
+  font-weight: bold;
+}
+
+header h1:after {
+  content:".";
+  color: #e42217;
+}
+
+/* Typography */
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Typography Spacing */
+
+:is(h1, h2, h3, h4, h5, h6) {
+  line-height: 1em;
+  text-transform: capitalize;
+}
+
+:is(h1, h2, h3, h4, h5, h6):not(:first-child) {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Horizontal Rulers */
+
+hr {
+  border: none;
+  margin: 3rem 0rem 3rem 0rem;
+  border-top: 1px solid #d3d3d3;
+  color: #d3d3d3;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
+}
+
+hr::after {
+  background: #fff;
+  content: '§';
+  padding: 0 4px;
+  position: relative;
+  top: -13px;
+}
+
+/* Links */
+
+a {
+  color: #222;
+  text-underline-offset: .4rem;
+}
+
+a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 1px solid currentColor;
+  outline-offset: 0.2rem;
+}
+
+/* Images */
+
+article img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  margin: 2rem auto;
+  border-radius: .6rem;
+  filter: grayscale(1);
+}
+
+@supports (aspect-ratio: 1) {
+  article img {
+    max-height: unset;
+    aspect-ratio: 3/2;
+  }
+}
+
+/* Image Captions */
+
+img+em { 
+  display: block;
+  text-align: center;
+  margin-top: -1.5rem;
+  color: #666;
+}
+
+/* Blockquotes */
+
+blockquote {
+  margin: 2rem 0;
+  padding: 0.5em 1rem;
+  border-left: 3px solid rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+/* Tags */
+
+/* Next & Previous Links */
+
+.links-nextprev {
+  list-style: none;
+  padding: 1rem 0;
+}
+
+/* Metadata */
+
+.post-metadata {
+  list-style: none;
+  color: #333333;
+  padding: 0;
+  margin: 1rem 0 2rem 0;
+  line-height: 1rem;
+}
+
+/* Metadata Links */
+
+.post-metadata a {
+  text-decoration: none;
+  list-style: none;
+  color: #888;
+  padding: 0;
+}
+
+.post-metadata a:hover {
+  text-decoration: underline;
+}
+
+/* Inline Code */
+code {
+  background-color: #f5f2f0;
+  border-radius: 3px;
+}
