@@ -63,6 +63,24 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addJavaScriptFunction("dateToRfc3339", pluginRss.dateToRfc3339);
     eleventyConfig.addLiquidFilter("dateToRfc822", pluginRss.dateToRfc822);
 
+    // split filter
+    eleventyConfig.addFilter("split", function(str, separator) {
+        return str.split(separator);
+    });
+
+    // tag list collection
+    eleventyConfig.addCollection("tagList", function(collectionApi) {
+        const tagsSet = new Set();
+        collectionApi.getAll().forEach(item => {
+            if ("tags" in item.data) {
+                let tags = item.data.tags;
+                tags = Array.isArray(tags) ? tags : [tags];
+                tags.forEach(tag => tagsSet.add(tag));
+            }
+        });
+        return [...tagsSet].sort();
+    });
+
     // build io directories
     return {
         dir: {

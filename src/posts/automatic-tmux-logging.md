@@ -1,16 +1,16 @@
 ---
-title: Automatic TMUX Logging
+title: Automatic TMUX Logging for Penetration Testers
 date: 2024-04-03
 tags: 
     - quick
     - pentesting
 ---
 
-Aaron James at TrustedSec wrote a great logging article called [Intro to Web App Security Testing: Logging](https://trustedsec.com/blog/intro-to-web-app-security-testing-logging). I've used the pipe-pane snippet on every penetration test since. Sometimes I forget to initiate logging with `PREFIX+h` before running commands. The following script uses `set-hook` to grab command output automatically and save to a file in the `~/Logs` directory.
+When I first started pentesting professionally I used Aaron James' [Intro to Web App Security Testing: Logging](https://trustedsec.com/blog/intro-to-web-app-security-testing-logging) article to setup my terminal logging. I've used that same pipe-pane snippet on every penetration test since. Of course, sometimes I would forget to initiate logging with `PREFIX+h` before running commands. I settled on a more automated solution that uses `set-hook` to grab command output automatically for every new tmux session, window, and pane.
 
 ## Trigger Logging on New Session, Window, and Pane
 
-Even though it would be inconceivable for us to forget to initiate our logging we can still save a few keystrokes by automating with TMUX and `set-hook`. This will initiate a log file for every new window and pane. Here's the relevant snippet from my `~/.tmux.conf` dotfile:
+Basic setup requires a few tmux plugins and setting a `set-hook` to a bash script.
 
 ```bash
 # Reference auto logging sh script for pipe-pane
@@ -30,7 +30,7 @@ if "test ! -d ~/.tmux/plugins/tpm" \
 run '~/.tmux/plugins/tpm/tpm'
 ```
 
-Note: if this is your first time running TMUX you will need to install the plugins, you can accomplish this with `PREFIX+I`, where the default prefix is `CTRL+B`. I'm currently running `tmux 3.3a`.
+If this is your first time running TMUX you will need to install the plugins, you can accomplish this with `PREFIX+I`, where the default prefix is `CTRL+B`. I'm currently running `tmux 3.3a`.
 
 A few things are happening here. First, we're checking if TMUX Plugin Manager (TPM) is installed. If it isn't we clone the TPM repository. Second, we initialize TPM and install the tmux-logging plugin. The `set-hook` lines call a shell script. The `~/.bin/tmux_logging.sh` script above contains Aaron's snippet and saves logs files to the `~/Logs` directory:
 
@@ -95,7 +95,7 @@ posts                   [Status: 200, Size: 7022, Words: 465, Lines: 77]
 :: Progress: [3/3] :: Job [1/1] :: 0 req/sec :: Duration: [0:00:00] :: Errors: 0 ::
 ```
 
-Reminder these are log logs, not log logs. They are essentially automated journal notes that you can use as a reference. They do not prove you did or did not do something -- the logs are local and you could do something nefarious like fudge timestamps or delete that one (read tenth) time you forgot the flag for `tar`.
+Reminder these are log logs, not log logs. They are essentially automated journal notes that you can use as a reference. They do not prove you did or did not do something. The logs are local and you could do something nefarious like fudge timestamps or delete that one (read tenth) time you forgot the flag for `tar`.
 
 # Resources
 

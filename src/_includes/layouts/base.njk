@@ -2,6 +2,7 @@
 <html lang="en">
 {% include "ascii.txt" %}
 <head>
+    <!-- Meta Data --> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ description or metadata.description }}">
@@ -13,15 +14,36 @@
     {% endset %}
     <style>{{ css | cssmin | safe }}</style>
     <title>{{ title or metadata.title }} | {{ metadata.siteName }}</title>
+    <!-- Unami Analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="b259cd2c-e02b-472f-b817-ab77f4f2d8b4"></script>
 </head>
 <body>
     <header>
         <h1>
-            {{ metadata.siteName }}
+            <span class="lambda">λ</span><a href="/pages/about/" class="author-link"><span class="author-text">{{ metadata.author.name }}</span></a>@<a href="/">{{ metadata.siteName | replace(" ", "") }}</a>:
+            {%- if page.url == "/" -%}
+              ~
+            {%- else -%}
+              {%- set parts = page.url | trim('/') | split('/') -%}
+              {%- set path = "" -%}
+              {%- for part in parts -%}
+                {%- if loop.first -%}
+                  {%- set path = part -%}
+                {%- else -%}
+                  {%- set path = path + '/' + part -%}
+                {%- endif -%}
+                {%- if not loop.last -%}
+                  <a href="{{ path }}/">{{ part }}</a>/
+                {%- else -%}
+                  <span>{{ part }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            #<span class="blinking-cursor">█</span>
         </h1>
     </header>
     <main>
-        {% include "layouts/navigation.njk" %}
+        {# {% include "layouts/navigation.njk" %} #}
         <article>
             {{ content | safe }}
         </article>
@@ -30,5 +52,7 @@
         {% include "layouts/footer.njk" %}
     </footer>
 <!-- Current page: {{ page.url }} -->
+{# Debug output: #}
+<!-- path: {{ path }} -->
 </body>
 </html>
