@@ -1,5 +1,6 @@
 ---
 title: All Posts
+permalink: /posts/index.html
 eleventyNavigation:
   key: Posts
   order: 2

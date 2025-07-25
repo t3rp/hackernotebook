@@ -17,11 +17,30 @@
 <body>
     <header>
         <h1>
-            {{ metadata.siteName }}
+            <span class="lambda">λ</span><a href="/pages/about/" class="author-link"><span class="author-text">{{ metadata.author.name }}</span></a>@<a href="/">{{ metadata.siteName | replace(" ", "") }}</a>:
+            {%- if page.url == "/" -%}
+              ~
+            {%- else -%}
+              {%- set parts = page.url | trim('/') | split('/') -%}
+              {%- set path = "" -%}
+              {%- for part in parts -%}
+                {%- if loop.first -%}
+                  {%- set path = part -%}
+                {%- else -%}
+                  {%- set path = path + '/' + part -%}
+                {%- endif -%}
+                {%- if not loop.last -%}
+                  <a href="{{ path }}/">{{ part }}</a>/
+                {%- else -%}
+                  <span>{{ part }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            #<span class="blinking-cursor">█</span>
         </h1>
     </header>
     <main>
-        {% include "layouts/navigation.njk" %}
+        {# {% include "layouts/navigation.njk" %} #}
         <article>
             {{ content | safe }}
         </article>
@@ -30,5 +49,7 @@
         {% include "layouts/footer.njk" %}
     </footer>
 <!-- Current page: {{ page.url }} -->
+{# Debug output: #}
+<!-- path: {{ path }} -->
 </body>
 </html>
